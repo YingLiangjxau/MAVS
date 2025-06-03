@@ -37,11 +37,10 @@ if __name__ == '__main__':
         cancer_type = 'aml'
         conf = dict()
         conf['dataset'] = cancer_type
+        exp, methy, mirna, survival = load_data.load_TCGA(DATASET_PATH, cancer_type, 'mean')
         exp = pd.read_csv(os.path.join(DATASET_PATH, cancer_type, "exp3"), sep=",")
         methy = pd.read_csv(os.path.join(DATASET_PATH, cancer_type, "methy3"), sep=",")
         mirna = pd.read_csv(os.path.join(DATASET_PATH, cancer_type , "mirna3"), sep=",")
-        survival = pd.read_csv(os.path.join(DATASET_PATH, cancer_type ,"survival"), sep="\t")
-        survival = survival.dropna(axis=0)
         # Preprocessing method
         exp_df = paddle.to_tensor(exp.values.T, dtype=paddle.float32)
         methy_df = paddle.to_tensor(methy.values.T, dtype=paddle.float32)
